@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Step5Date = ({ prev, formData }) => {
+const Step5Date = ({ prev, formData, goToStep }) => {
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [status, setStatus] = useState(null);
@@ -24,6 +24,12 @@ const Step5Date = ({ prev, formData }) => {
 
     const result = await res.json();
     setStatus(result.message || result.error);
+
+    if (res.ok) {
+       setTimeout(() => {
+        goToStep(1);
+      }, 2000);
+    }
   };
 
   return (
@@ -34,8 +40,8 @@ const Step5Date = ({ prev, formData }) => {
       <h6 className="mt-2">End Date</h6>
       <input type="date" className="form-control" value={end} onChange={(e) => setEnd(e.target.value)} />
       {status && <p className="mt-2">{status}</p>}
-      <button className="btn btn-secondary me-2 mt-3" style={{width:"25%"}} onClick={prev}>Back</button>
-      <button className="btn btn-success mt-3" style={{width:"25%"}} onClick={handleSubmit}>Book</button>
+      <button className="btn btn-secondary me-2 mt-3" style={{ width: "25%" }} onClick={prev}>Back</button>
+      <button className="btn btn-success mt-3" style={{ width: "25%" }} onClick={handleSubmit}>Book</button>
     </div>
   );
 };
