@@ -36,10 +36,28 @@ const Step5Date = ({ prev, formData, goToStep }) => {
     <div>
       <h4>Pick Booking Dates</h4>
       <h6>Start Date</h6>
-      <input type="date" className="form-control" value={start} onChange={(e) => setStart(e.target.value)} />
+      <input 
+      type="date" 
+      className="form-control"
+      name="from"
+      min={new Date().toISOString().split("T")[0]} 
+      value={start} 
+      onChange={(e) => setStart(e.target.value)} 
+      />
+
       <h6 className="mt-2">End Date</h6>
-      <input type="date" className="form-control" value={end} onChange={(e) => setEnd(e.target.value)} />
+
+      <input 
+      type="date" 
+      className="form-control"
+      name="to" 
+      min={start}
+      value={end} 
+      onChange={(e) => setEnd(e.target.value)} 
+      />
+
       {status && <p className="mt-2">{status}</p>}
+
       <button className="btn btn-secondary me-2 mt-3" style={{ width: "25%" }} onClick={prev}>Back</button>
       <button className="btn btn-success mt-3" style={{ width: "25%" }} onClick={handleSubmit}>Book</button>
     </div>
